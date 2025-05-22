@@ -383,19 +383,19 @@ def parseUnmarkedLabels():
     return
 
 def compileASM(filepath):
-    file = open(filepath, "r")
-    lineNumber = 1  #file line number for specifying errors
-    for line in file:
-        #print(line)
-        line = line.upper()
-        line = line.split(";")  #getting rid of comments
-        line[0] = line[0].replace("\n", "") #removing return line
-        line[0] = line[0].replace("\r", "")
-        line[0] = line[0].strip()
-        #print(line)
-        if (len(line[0]) > 0):
-            parseLine(line[0], lineNumber)
-        lineNumber = lineNumber + 1
+    with open(filepath, "r") as file:
+        lineNumber = 1  #file line number for specifying errors
+        for line in file:
+            #print(line)
+            line = line.upper()
+            line = line.split(";")  #getting rid of comments
+            line[0] = line[0].replace("\n", "") #removing return line
+            line[0] = line[0].replace("\r", "")
+            line[0] = line[0].strip()
+            #print(line)
+            if (len(line[0]) > 0):
+                parseLine(line[0], lineNumber)
+            lineNumber = lineNumber + 1
     parseUnmarkedLabels()    
     parseProgram()
     compileResults()
